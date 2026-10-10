@@ -1,0 +1,29 @@
+﻿# Local datasets - do not upload to GitHub
+data/raw/
+data/processed/
+
+# SQL Server database files and backups
+*.mdf
+*.ldf
+*.bak
+
+# Credentials and environment secrets
+.env
+*.key
+*.pem
+
+# Temporary files
+*.tmp
+*.log
+
+# Operating system files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor settings
+.vscode/
+.idea/
+
+# Power BI temporary and backup files
+*.pbix~
