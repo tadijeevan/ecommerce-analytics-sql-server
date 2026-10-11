@@ -222,13 +222,16 @@ Completed initial ingestion and validation for orders, customers, and order item
 
 
 
-\## Session Notes
+## Session Notes
 
-\- Orders imported and validated on 2026-10-11.
+- Orders imported and validated on 2026-10-11.
+- Customers imported and validated on 2026-10-11.
+- Order items imported and validated on 2026-10-11.
+- Payments imported and validated on 2026-10-11: 103,886 records.
+- Reviews imported and validated on 2026-10-11: 99,224 records.
+- Review data quality: 789 review IDs appear multiple times, representing 814 extra rows.
+- Preserved all review records using the composite primary key (review_id, order_id).
+- Created sql/02_data_ingestion/05_load_order_reviews.sql.
+- Next: import and validate the products dataset.
 
-\- Customers imported and validated on 2026-10-11.
-
-\- Order items imported and validated on 2026-10-11.
-
-\- Next session: continue with the payments dataset.
 
