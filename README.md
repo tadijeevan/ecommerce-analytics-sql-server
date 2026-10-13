@@ -1,4 +1,4 @@
-ï»¿# E-commerce Analytics Engineering with SQL Server
+# E-commerce Analytics Engineering with SQL Server
 
 ## Project Overview
 
@@ -28,9 +28,9 @@ The project covers data ingestion, data quality validation, SQL analytics, repor
 
 The project organizes data into three SQL Server schemas:
 
-- **staging** â€” source datasets loaded into SQL Server.
-- **analytics** â€” analytical transformations and calculations.
-- **reporting** â€” views prepared for reporting and Power BI.
+- **staging** — source datasets loaded into SQL Server.
+- **analytics** — analytical transformations and calculations.
+- **reporting** — views prepared for reporting and Power BI.
 
 ### Data Sources
 
@@ -130,6 +130,13 @@ Source: https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce
 
 Refer to the original dataset page for attribution and licensing requirements.
 
+
 ## Project Status
 
-Core SQL analytics and Power BI dashboard completed. Final documentation and validation are in progress.
+**Status: Completed**
+
+The project includes data ingestion, data quality validation, SQL analytics, reporting views, and an interactive Power BI dashboard.
+
+Project documentation and the dashboard preview have been published to GitHub.
+
+The project is ready to showcase in a professional portfolio.
