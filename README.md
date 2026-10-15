@@ -107,6 +107,30 @@ The **Executive Overview** page contains:
 
 These findings describe the analyzed dataset and should not be interpreted as representing the entire e-commerce industry.
 
+
+
+## Key Findings
+
+The SQL analysis identified several patterns in delivery performance and customer satisfaction.
+
+### Delivery Performance
+
+- **Late deliveries:** 6,534 of 96,470 eligible delivered orders were late, representing 6.77%.
+- **Review scores and delivery performance:** Orders delivered early had an average review score of 4.29/5, compared with 2.27/5 for late deliveries.
+- **Negative reviews:** 62.41% of reviews associated with late deliveries had scores of 1 or 2, compared with 9.23% for early deliveries.
+- **Geographic variation:** Sao Paulo had an average delivery time of 8.70 days across 40,494 delivered orders. Roraima averaged 29.34 days across 41 orders, so its smaller sample size should be considered.
+
+### Customer Satisfaction
+
+- **Positive reviews:** 77.07% of the 99,224 reviews analyzed received scores of 4 or 5.
+- **Negative reviews:** 14.69% received scores of 1 or 2.
+
+### Business Implications
+
+The results suggest that delivery reliability deserves further investigation as part of customer-experience improvement efforts. Seller-level and geographic analyses can help identify where operational reviews may be most useful.
+
+These findings describe the analyzed Olist dataset. The observed relationship between delivery performance and review scores does not establish causation, and small sample sizes can make some comparisons less reliable.
+
 ## Metric Definitions and Limitations
 
 - **Product revenue:** Sum of item prices for delivered orders.
