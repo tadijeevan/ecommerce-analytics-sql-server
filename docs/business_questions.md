@@ -6,11 +6,15 @@
 
 
 
-This project analyzes the Brazilian e-commerce dataset from Olist using Microsoft SQL Server. It focuses on data quality, customer behavior, product performance, payments, seller performance, delivery operations, and customer satisfaction.
+This project analyzes the Brazilian E-Commerce Public Dataset by Olist using Microsoft SQL Server. It focuses on data quality, customer behavior, product performance, payments, seller performance, delivery operations, and customer satisfaction.
 
 
 
 The objective is to transform raw transactional data into meaningful business insights using SQL queries, aggregations, Common Table Expressions (CTEs), and window functions.
+
+
+
+The project documents 30 business questions across seven analytical areas. These questions provide a structured framework for the SQL analysis.
 
 
 
@@ -192,11 +196,15 @@ The project demonstrates practical use of:
 
 \- Customer review scores and delivery performance indicate associations; they do not independently establish causation.
 
+\- Delivery-performance classifications must use consistent definitions across SQL queries, reports, and documentation.
+
 \- Results should be interpreted in the context of the dataset's coverage and limitations.
 
+\- Small sample sizes can make comparisons between categories, sellers, or geographic regions less reliable.
 
 
-\## Project Scope
+
+\## Project Scope and Validation
 
 
 
@@ -204,5 +212,9 @@ This document maps the 30 business questions used to structure the SQL analysis.
 
 
 
-The presence of a question in this checklist does not, by itself, certify that its query has been executed and validated. Query logic, output validation, and documentation should be completed before the project is considered final.
+The repository contains 24 SQL scripts in `sql/05\_business\_analysis/`. A single script may address multiple questions, so the number of scripts does not need to equal the number of business questions.
+
+
+
+Documenting a question does not, by itself, certify that its query has been executed and validated. Query logic, output validation, and documented findings should be reviewed before the project is considered final.
 
