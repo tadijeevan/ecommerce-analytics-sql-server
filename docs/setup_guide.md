@@ -80,27 +80,31 @@ The staging tables are located in the `staging` schema.
 
 \## 5. Data Ingestion
 
+Data-ingestion scripts are located in:
 
+`sql/02_data_ingestion/`
 
-The repository contains data-ingestion scripts under:
+The scripts load raw Olist data into typed staging tables in the `EcommerceAnalytics` database.
 
+### Ingestion Procedure
 
+1. Confirm that the database and staging tables have been created.
+2. Import the raw Olist dataset into the corresponding source tables under the `dbo` schema.
+3. Review the relevant ingestion script before execution.
+4. Run the ingestion scripts only when their target staging tables are empty.
+5. Validate the source and staging row counts after loading.
 
-&#x20;   sql/02\_data\_ingestion/
+The orders ingestion script is:
 
+`sql/02_data_ingestion/01_load_orders.sql`
 
+This script loads data from `dbo.olist_orders_dataset` into `staging.orders`. It checks that the source and target tables exist, prevents loading when the target already contains data, uses a transaction, and validates the loaded row count.
 
-Review the scripts before execution.
+**Important:** Do not execute the orders ingestion script against a database where `staging.orders` already contains records. The script intentionally stops to prevent duplicate loading. For a fresh setup, ensure that the raw source table is populated and the target staging table is empty before running it.
 
+Review all ingestion scripts and confirm that every required staging table has been loaded before proceeding to data-quality validation.
 
-
-The ingestion process should load the source datasets into the corresponding staging tables.
-
-
-
-\*\*Important:\*\* Confirm that all required source files and ingestion scripts are available before attempting a complete reload. Verify the loading process for every required table, including orders, before considering the setup fully reproducible.
-
-
+A successful execution in an existing database does not, by itself, establish that the entire project can be reproduced from a clean environment.
 
 \## 6. Data Quality Validation
 
