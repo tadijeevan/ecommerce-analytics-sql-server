@@ -35,11 +35,23 @@ The analysis covers orders, customers, payments, products, sellers, delivery per
 
 ## Data Architecture
 
-The project organizes analytical data using three SQL Server schemas:
+The project uses three SQL Server schemas to organize the data environment:
 
-- **`staging`** — source datasets loaded into SQL Server.
-- **`analytics`** — analytical transformations and calculations.
-- **`reporting`** — views prepared for reporting and Power BI.
+- **`staging`** — stores source datasets loaded into SQL Server.
+- **`analytics`** — created for analytical transformations and calculations. A separate transformation layer is not currently implemented in the repository.
+- **`reporting`** — contains reusable SQL views that calculate business metrics directly from staging tables.
+
+### Analytical Workflow
+
+The current SQL workflow consists of:
+
+1. Load source datasets into the staging schema.
+2. Run data quality checks to assess completeness, duplicates, timestamp consistency, and relationships.
+3. Execute business-analysis queries for revenue, customers, products, payments, sellers, deliveries, and reviews.
+4. Use reporting views to expose selected business metrics for reporting and Power BI.
+5. Validate the results and document findings and limitations.
+
+The reporting views currently reference staging tables directly. The `analytics` schema is created during database setup, but dedicated transformation objects have not been identified in the current SQL scripts.
 
 ### Data Sources
 
