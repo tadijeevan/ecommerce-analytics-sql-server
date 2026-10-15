@@ -14,22 +14,26 @@ Business questions:
 Metric definitions:
 - DeliveryVarianceDays:
     Actual delivery date minus estimated delivery date,
-    measured in calendar-day boundaries.
+    measured in calendar-day boundaries using DATEDIFF.
 - Early:
     DeliveryVarianceDays < 0.
-- OnTime:
+- On Time:
     DeliveryVarianceDays = 0.
 - Late:
     DeliveryVarianceDays > 0.
 - NegativeReview:
     Review score of 1 or 2.
+- PositiveReview:
+    Review score of 4 or 5.
+- NeutralReview:
+    Review score of 3.
 
 Scope and limitations:
 - Only delivered orders with valid actual and estimated
   delivery timestamps and non-null review scores are included.
-- Delivery groups are based on actual versus estimated
-  delivery dates.
-- Review scores measure customer feedback.
+- Delivery groups use calendar-day boundaries, not exact
+  timestamp equality.
+- Review counts represent joined review records.
 - The results show associations and do not establish causation.
 */
 
@@ -51,16 +55,25 @@ Scope and limitations:
         ) AS DeliveryVarianceDays,
 
         CASE
-            WHEN o.order_delivered_customer_date
-                 < o.order_estimated_delivery_date
+            WHEN DATEDIFF(
+                DAY,
+                o.order_estimated_delivery_date,
+                o.order_delivered_customer_date
+            ) < 0
                 THEN 'Early'
 
-            WHEN o.order_delivered_customer_date
-                 = o.order_estimated_delivery_date
+            WHEN DATEDIFF(
+                DAY,
+                o.order_estimated_delivery_date,
+                o.order_delivered_customer_date
+            ) = 0
                 THEN 'On Time'
 
-            WHEN o.order_delivered_customer_date
-                 > o.order_estimated_delivery_date
+            WHEN DATEDIFF(
+                DAY,
+                o.order_estimated_delivery_date,
+                o.order_delivered_customer_date
+            ) > 0
                 THEN 'Late'
         END AS DeliveryPerformance
 
@@ -141,25 +154,42 @@ ORDER BY
 GO
 
 ------------------------------------------------------------
--- 2. Review score distribution by delivery performance group
+-- 2. Review score distribution by delivery performance
 ------------------------------------------------------------
 
 ;WITH DeliveryReviewDetails AS
 (
     SELECT
+        o.order_id AS OrderID,
+        r.review_id AS ReviewID,
         r.review_score AS ReviewScore,
 
+        DATEDIFF(
+            DAY,
+            o.order_estimated_delivery_date,
+            o.order_delivered_customer_date
+        ) AS DeliveryVarianceDays,
+
         CASE
-            WHEN o.order_delivered_customer_date
-                 < o.order_estimated_delivery_date
+            WHEN DATEDIFF(
+                DAY,
+                o.order_estimated_delivery_date,
+                o.order_delivered_customer_date
+            ) < 0
                 THEN 'Early'
 
-            WHEN o.order_delivered_customer_date
-                 = o.order_estimated_delivery_date
+            WHEN DATEDIFF(
+                DAY,
+                o.order_estimated_delivery_date,
+                o.order_delivered_customer_date
+            ) = 0
                 THEN 'On Time'
 
-            WHEN o.order_delivered_customer_date
-                 > o.order_estimated_delivery_date
+            WHEN DATEDIFF(
+                DAY,
+                o.order_estimated_delivery_date,
+                o.order_delivered_customer_date
+            ) > 0
                 THEN 'Late'
         END AS DeliveryPerformance
 
@@ -179,7 +209,9 @@ ReviewDistribution AS
         DeliveryPerformance,
         ReviewScore,
         COUNT(*) AS ReviewCount
+
     FROM DeliveryReviewDetails
+
     GROUP BY
         DeliveryPerformance,
         ReviewScore
@@ -201,6 +233,7 @@ SELECT
     ) AS PercentageWithinDeliveryGroup
 
 FROM ReviewDistribution
+
 ORDER BY
     CASE DeliveryPerformance
         WHEN 'Early' THEN 1
