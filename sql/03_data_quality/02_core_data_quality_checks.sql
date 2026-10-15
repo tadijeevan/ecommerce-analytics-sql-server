@@ -265,6 +265,32 @@ FROM (
     HAVING COUNT_BIG(*) > 1
 ) AS d;
 
+-- Geolocation: identify exact duplicate records across all five columns.
+-- Repeated postal codes alone are not necessarily duplicates.
+-- Report the issue; do not automatically delete source records.
+
+SELECT
+    COUNT_BIG(*) AS DuplicateGroups,
+    SUM(Occurrences - 1) AS ExcessDuplicateRows,
+    MAX(Occurrences) AS MaximumOccurrences
+FROM (
+    SELECT
+        geolocation_zip_code_prefix,
+        geolocation_lat,
+        geolocation_lng,
+        geolocation_city,
+        geolocation_state,
+        COUNT_BIG(*) AS Occurrences
+    FROM staging.geolocation
+    GROUP BY
+        geolocation_zip_code_prefix,
+        geolocation_lat,
+        geolocation_lng,
+        geolocation_city,
+        geolocation_state
+    HAVING COUNT_BIG(*) > 1
+) AS DuplicateGeolocation;
+
 ------------------------------------------------------------
 -- Q4. MISSING OR INCONSISTENT ORDER TIMESTAMPS
 ------------------------------------------------------------
