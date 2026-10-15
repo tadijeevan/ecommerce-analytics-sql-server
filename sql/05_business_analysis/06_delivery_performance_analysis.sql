@@ -8,6 +8,8 @@ Business questions:
 1. How many days does delivery take on average?
 2. What percentage of delivered orders arrive late?
 3. How many orders arrive early, on the estimated date, or late?
+4. How many delivered orders have valid actual and estimated
+   delivery dates?
 
 Metric definitions:
 - ActualDeliveryDays: Days between purchase and actual delivery.
