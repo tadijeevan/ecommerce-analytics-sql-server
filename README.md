@@ -8,12 +8,18 @@ The project covers data ingestion, data quality validation, SQL analytics, repor
 
 ## Business Objectives
 
-- Analyze monthly product revenue and revenue growth.
-- Identify top-performing product categories.
-- Understand payment method distribution.
-- Evaluate customer review scores.
-- Compare seller performance.
-- Present key business metrics through an executive dashboard.
+The project addresses 30 documented business questions covering data quality, orders, payments, customers, products, sellers, delivery operations, and customer satisfaction.
+
+Key objectives include:
+
+- Analyze monthly order and item-value trends, including month-over-month growth.
+- Identify top-performing products and categories by item value, order count, and item volume.
+- Understand payment methods, payment value, and installment distributions.
+- Analyze customer geography, repeat purchases, cohorts, and lifetime purchase value.
+- Evaluate seller performance, delivery delays, and geographic differences.
+- Examine customer review scores and their relationship with delivery performance.
+- Apply SQL techniques such as joins, CTEs, subqueries, conditional aggregation, ranking, and window functions.
+- Validate data quality and document metric definitions before interpreting results.
 
 ## Technology Stack
 
